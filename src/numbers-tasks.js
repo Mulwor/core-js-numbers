@@ -203,10 +203,11 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
-  for (let i = 2, s = Math.sqrt(n); i <= s; i + 1) {
-    if (n % i === 0) return false;
+  for (let i = 2; i <= Math.sqrt(n); i += 1) {
+    if (n % i === 0) {
+      return false;
+    }
   }
-
   return n > 1;
 }
 
@@ -296,13 +297,10 @@ function getSumToN(num) {
  *   5   => 5  // 5
  */
 function getSumOfDigits(num) {
-  let result = 0;
-
-  for (let i = 0; i <= num; i += 1) {
-    result += i;
-  }
-
-  return result;
+  return num
+    .toString()
+    .split('')
+    .reduce((a, b) => +a + +b);
 }
 
 /**
@@ -317,7 +315,7 @@ function getSumOfDigits(num) {
  *   15  => false
  */
 function isPowerOfTwo(num) {
-  return num % 2 === 0;
+  return (Math.log(num) / Math.log(2)) % 1 === 0;
 }
 
 /**
@@ -405,7 +403,7 @@ function toPrecision(number, precision) {
  * Number(-5)    => -5
  */
 function getNumberValue(number) {
-  return Number(number);
+  return number.valueOf();
 }
 
 /**
@@ -453,7 +451,7 @@ function isInteger(number) {
  * 'abcdefgh'      => NaN
  */
 function getFloatOnString(str) {
-  return parseFloat(str);
+  return Number.parseFloat(str);
 }
 
 /**
@@ -471,7 +469,7 @@ function getFloatOnString(str) {
  * '10', 8              => 8
  */
 function getIntegerOnString(str, base) {
-  return parseInt(str, base);
+  return Number.parseInt(str, base);
 }
 
 /**
@@ -544,7 +542,7 @@ function roundToNearestInteger(number) {
  * -5.5 => -5
  */
 function getIntegerPartNumber(number) {
-  return Number.parseFloat(number);
+  return Math.trunc(number);
 }
 
 /**
@@ -627,8 +625,10 @@ function getHypotenuse(a, b) {
 function getCountOfOddNumbers(number) {
   let result = 0;
 
-  for (let i = 0; i < number; i += 1) {
-    if (i % 2) result += 1;
+  for (let i = 0; i < Math.abs(number) + 1; i += 1) {
+    if (i % 2 !== 0) {
+      result += 1;
+    }
   }
 
   return result;
